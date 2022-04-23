@@ -2,3 +2,5 @@ src/dataset/03-11
 .ipynb_checkpoints
 .~lock*
 *.csv
+
+*.egg-info
