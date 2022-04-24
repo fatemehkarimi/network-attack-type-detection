@@ -19,7 +19,7 @@ features = {
     'fwd_packet_len_max':       ' Fwd Packet Length Max',
     'fwd_packet_len_min':       ' Fwd Packet Length Min',
     'fwd_packet_len_mean':      ' Fwd Packet Length Mean',
-    'fwd_packat_len_std':       ' Fwd Packet Length Std',
+    'fwd_packet_len_std':       ' Fwd Packet Length Std',
     'bwd_packet_len_max':       'Bwd Packet Length Max',
     'bwd_packet_len_min':       ' Bwd Packet Length Min',
     'bwd_packet_len_mean':      ' Bwd Packet Length Mean',
