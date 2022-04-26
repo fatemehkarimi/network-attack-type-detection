@@ -1,7 +1,3 @@
-from re import I
-from turtle import st
-
-
 features = {
     'unnamed':                  'Unnamed: 0',
     'flow_id':                  'Flow ID',
@@ -90,5 +86,19 @@ features = {
     'idle_min':                 ' Idle Min',
     'similar_http':             'SimillarHTTP',
     'inbound':                  ' Inbound',
-    'label':                    ' Label'
 }
+
+categorical_features = [
+    features['unnamed'],
+    features['flow_id'],
+    features['source_ip'],
+    features['source_port'],
+    features['destination_ip'],
+    features['destination_port'],
+    features['protocol'],
+    features['timestamp'],
+    features['inbound'],
+    features['similar_http']
+]
+
+class_label = ' Label'
