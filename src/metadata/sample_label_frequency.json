@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "BENIGN": 50021,
+        "MSSQL": 42007,
+        "Syn": 36005,
+        "UDP": 28005,
+        "NetBIOS": 26805,
+        "LDAP": 14003,
+        "Portmap": 1200,
+        "UDPLag": 14
+    },
+    "total": 198060
+}
