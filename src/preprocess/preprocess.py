@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.feature_selection import VarianceThreshold
-from metadata.const import features, categorical_features, class_label
+from metadata.const import features, class_label
 
 
 def get_config(section):
@@ -56,10 +56,28 @@ def plot_correlation(correlation, filename, labels=None):
 
 def main(args):
     df = pd.read_csv(args.file, dtype={features['similar_http']: str})
+    df.drop(
+        [
+            features['unnamed0'],
+            features['unnamed1'],
+            features['flow_id'],
+            features['source_ip'],
+            features['source_port'],
+            features['destination_ip'],
+            features['destination_port'],
+            features['timestamp'],
+            features['similar_http'],
+        ],
+        axis=1,
+        inplace=True
+    )
+
+    categorical_features = [features['protocol'], features['inbound']]
+
     df.replace([np.inf, -np.inf], np.nan, inplace=True)
     df.dropna(axis=0, inplace=True)
 
-    numeric_features = [f for f in features.values()
+    numeric_features = [f for f in df.columns
                             if f not in categorical_features]
     # for f in numeric_features:
         # remove_outlier(df, f)
@@ -67,19 +85,19 @@ def main(args):
     df.loc[df[class_label] == 'BENIGN', class_label] = 0
     df.loc[df[class_label] != 0, class_label] = 1
     
-    # df.drop(categorical_features, axis=1, inplace=True)
-    # df = remove_zero_variance(df, numeric_features)
+    df = remove_zero_variance(df, numeric_features)
 
-    # corr_matrix = numeric_df.corr(method='pearson')
-    # redundent_features = set()
-    # for i in range(len(corr_matrix.columns)):
-    #     for j in range(i):
-    #         if abs(corr_matrix.iloc[i, j]) > 0.8:
-    #             redundent_features.add(corr_matrix.columns[i])
+    numeric_df = df.drop(categorical_features, axis=1)
+    corr_matrix = numeric_df.corr(method='pearson')
+    redundent_features = set()
+    for i in range(len(corr_matrix.columns)):
+        for j in range(i):
+            if abs(corr_matrix.iloc[i, j]) > 0.8:
+                redundent_features.add(corr_matrix.columns[i])
 
-    # print(redundent_features)
-    # plot_correlation(corr_matrix, 'numeric-correlation.png')
-    df.to_csv(args.output)
+    plot_correlation(corr_matrix, 'numeric-correlation.png')
+    df.drop(list(redundent_features), axis=True, inplace=True)
+    df.to_csv(args.output, index=False)
 
 
 if __name__ == "__main__":

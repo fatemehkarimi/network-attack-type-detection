@@ -1,5 +1,6 @@
 features = {
-    'unnamed':                  'Unnamed: 0',
+    'unnamed0':                 'Unnamed: 0',
+    'unnamed1':                 'Unnamed: 0.1',
     'flow_id':                  'Flow ID',
     'source_ip':                ' Source IP',
     'source_port':              ' Source Port',
@@ -87,18 +88,5 @@ features = {
     'similar_http':             'SimillarHTTP',
     'inbound':                  ' Inbound',
 }
-
-categorical_features = [
-    features['unnamed'],
-    features['flow_id'],
-    features['source_ip'],
-    features['source_port'],
-    features['destination_ip'],
-    features['destination_port'],
-    features['protocol'],
-    features['timestamp'],
-    features['inbound'],
-    features['similar_http']
-]
 
 class_label = ' Label'
