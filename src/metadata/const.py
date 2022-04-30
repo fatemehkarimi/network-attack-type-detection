@@ -1,6 +1,5 @@
 features = {
     'unnamed0':                 'Unnamed: 0',
-    'unnamed1':                 'Unnamed: 0.1',
     'flow_id':                  'Flow ID',
     'source_ip':                ' Source IP',
     'source_port':              ' Source Port',
@@ -47,7 +46,7 @@ features = {
     'bwd_packets_s':            ' Bwd Packets/s',
     'min_packet_len':           ' Min Packet Length',
     'max_packet_len':           ' Max Packet Length',
-    'packet_len_min':           ' Packet Length Mean',
+    'packet_len_mean':           ' Packet Length Mean',
     'packet_len_std':           ' Packet Length Std',
     'packet_len_variance':      ' Packet Length Variance',
     'fin_flag_count':           'FIN Flag Count',

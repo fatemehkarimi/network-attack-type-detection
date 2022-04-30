@@ -1,13 +1,13 @@
 {
     "labels": {
-        "LDAP": 0.07,
-        "NetBIOS": 0.134,
-        "BENIGN": 0.25,
-        "MSSQL": 0.21,
-        "Portmap": 0.006,
-        "Syn": 0.18,
-        "UDP": 0.14,
-        "UDPLag": 6.89802487e-5
+        "LDAP": 0.047,
+        "NetBIOS": 0.089,
+        "BENIGN": 0.5,
+        "MSSQL": 0.142,
+        "Portmap": 0.0045,
+        "Syn": 0.12,
+        "UDP": 0.094,
+        "UDPLag": 4.59868325e-5
     },
     "total": 200000
 }

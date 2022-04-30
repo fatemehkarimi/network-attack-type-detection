@@ -51,6 +51,9 @@ def plot_correlation(correlation, filename, labels=None):
         ax.set_yticks(ticks)
         ax.set_xticklabels(labels)
         ax.set_yticklabels(labels)
+
+        plt.setp(ax.get_xticklabels(), rotation=45, ha="left",
+                rotation_mode="anchor")
     plt.savefig(filename)
 
 
@@ -59,7 +62,6 @@ def main(args):
     df.drop(
         [
             features['unnamed0'],
-            features['unnamed1'],
             features['flow_id'],
             features['source_ip'],
             features['source_port'],
@@ -94,8 +96,12 @@ def main(args):
         for j in range(i):
             if abs(corr_matrix.iloc[i, j]) > 0.8:
                 redundent_features.add(corr_matrix.columns[i])
+    # plot_correlation(
+    #     corr_matrix,
+    #     'numeric-correlation.png',
+    #     labels=numeric_df.columns.to_list()
+    # )
 
-    plot_correlation(corr_matrix, 'numeric-correlation.png')
     df.drop(list(redundent_features), axis=True, inplace=True)
     df.to_csv(args.output, index=False)
 
