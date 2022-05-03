@@ -14,25 +14,6 @@ def get_config(section):
     return dict(config.items(section))
 
 
-def get_box_whisker_range(col):
-    q1 = col.quantile(q=0.25)
-    q3 = col.quantile(q=0.75)
-    iqr = q3 - q1
-    min_range = q1 - 1.5 * iqr
-    max_range = q3 + 1.5 * iqr
-
-    return min_range, max_range
-
-
-def remove_outlier(df, feature):
-    min_range, max_range = get_box_whisker_range(df[feature])
-    df.loc[
-        lambda x: (x[feature] < min_range)
-                    | (x[feature] > max_range),
-        feature] = np.nan
-    df.dropna(axis=0, inplace=True)
-
-
 def remove_zero_variance(df, features):
     const_filter = VarianceThreshold()
     const_filter.fit(df)
@@ -40,7 +21,7 @@ def remove_zero_variance(df, features):
     return df.iloc[:, cols]
 
 
-def plot_correlation(correlation, filename, labels=None):
+def plot_correlation(correlation, filename, save=True, labels=None):
     fig = plt.figure(figsize=(10.41, 7.29))
     ax = fig.add_subplot(111)
     cax = ax.matshow(correlation, vmin=-1, vmax=1)
@@ -54,7 +35,8 @@ def plot_correlation(correlation, filename, labels=None):
 
         plt.setp(ax.get_xticklabels(), rotation=45, ha="left",
                 rotation_mode="anchor")
-    plt.savefig(filename)
+    if save:
+        plt.savefig(filename)
 
 
 def main(args):
@@ -81,8 +63,6 @@ def main(args):
 
     numeric_features = [f for f in df.columns
                             if f not in categorical_features]
-    # for f in numeric_features:
-        # remove_outlier(df, f)
 
     df.loc[df[class_label] == 'BENIGN', class_label] = 0
     df.loc[df[class_label] != 0, class_label] = 1
